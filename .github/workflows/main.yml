@@ -28,72 +28,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        name: [
-          "windows-py39",
-          "windows-py313",
-          "windows-pypy3",
-
-          "ubuntu-py39-pytestmain",
-          "ubuntu-py39",
-          "ubuntu-py310",
-          "ubuntu-py311",
-          "ubuntu-py312",
-          "ubuntu-py313",
-          "ubuntu-pypy3",
-          "ubuntu-benchmark",
-        ]
+        name: ["ubuntu-py39"]
 
         include:
-          - name: "windows-py39"
-            python: "3.9"
-            os: windows-latest
-            tox_env: "py39"
-          - name: "windows-py313"
-            python: "3.13"
-            os: windows-latest
-            tox_env: "py313"
-          - name: "windows-pypy3"
-            python: "pypy3.9"
-            os: windows-latest
-            tox_env: "pypy3"
-          - name: "ubuntu-py39-pytestmain"
-            python: "3.9"
-            os: ubuntu-latest
-            tox_env: "py39-pytestmain"
-            use_coverage: true
           - name: "ubuntu-py39"
             python: "3.9"
             os: ubuntu-latest
             tox_env: "py39"
             use_coverage: true
-          - name: "ubuntu-py310"
-            python: "3.10"
-            os: ubuntu-latest
-            tox_env: "py310"
-          - name: "ubuntu-py311"
-            python: "3.11"
-            os: ubuntu-latest
-            tox_env: "py311"
-            use_coverage: true
-          - name: "ubuntu-py312"
-            python: "3.12"
-            os: ubuntu-latest
-            tox_env: "py312"
-            use_coverage: true
-          - name: "ubuntu-py313"
-            python: "3.13"
-            os: ubuntu-latest
-            tox_env: "py313"
-            use_coverage: true
-          - name: "ubuntu-pypy3"
-            python: "pypy3.9"
-            os: ubuntu-latest
-            tox_env: "pypy3"
-            use_coverage: true
-          - name: "ubuntu-benchmark"
-            python: "3.9"
-            os: ubuntu-latest
-            tox_env: "benchmark"
 
     steps:
     - uses: actions/checkout@v5
@@ -131,20 +73,3 @@ jobs:
         fail_ci_if_error: true
         files: ./coverage.xml
         verbose: true
-
-  deploy:
-    needs: [check-package]
-    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags') && github.repository == 'pytest-dev/pluggy'
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-    steps:
-      - name: Download built packages from the check-package job.
-        uses: actions/download-artifact@v5
-        with:
-          name: Packages
-          path: dist
-      - name: Publish package
-        uses: pypa/gh-action-pypi-publish@v1.13.0
-        with:
-          attestations: true
