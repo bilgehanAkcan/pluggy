@@ -110,6 +110,14 @@ jobs:
           python -m pip install --upgrade pip setuptools
           python -m pip install pytest-testmon
 
+      - name: Restore .testmondata cache
+        uses: actions/cache@v4
+        with:
+          path: .testmondata
+          key: testmon-${{ github.ref_name }}
+          restore-keys: |
+            testmon-
+            
       - name: First run (full, builds testmon cache)
         run: |
           pip install dist/*.whl
