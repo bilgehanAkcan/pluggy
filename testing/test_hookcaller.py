@@ -4,7 +4,6 @@ from typing import Callable
 from typing import TypeVar
 
 import pytest
-import time
 
 from pluggy import HookimplMarker
 from pluggy import HookspecMarker
@@ -199,7 +198,6 @@ def test_adding_wrappers_ordering_tryfirst(hc: HookCaller, addmeth: AddMeth) -> 
     def he_method3():
         yield  # pragma: no cover
 
-    time.sleep(120)
     assert funcs(hc.get_hookimpls()) == [he_method2, he_method1, he_method3]
 
 
