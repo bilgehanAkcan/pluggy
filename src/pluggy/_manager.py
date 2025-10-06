@@ -426,7 +426,6 @@ class PluginManager:
 
     def list_name_plugin(self) -> list[tuple[str, _Plugin]]:
         """Return a list of (name, plugin) pairs for all registered plugins."""
-        print("dummy print statement")
         return list(self._name2plugin.items())
 
     def get_hookcallers(self, plugin: _Plugin) -> list[HookCaller] | None:
