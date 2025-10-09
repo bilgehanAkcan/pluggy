@@ -114,7 +114,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: .testmondata
-          key: testmon-${{ github.ref_name }}-${{ github.run_id }}
+          key: testmon-${{ github.ref_name }}
 
       - name: Second run (incremental)
         run: |
