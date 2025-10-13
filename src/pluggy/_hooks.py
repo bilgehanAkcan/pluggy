@@ -25,7 +25,7 @@ import warnings
 
 from ._result import Result
 
-
+# Explain these class variables
 _T = TypeVar("_T")
 _F = TypeVar("_F", bound=Callable[..., object])
 _Namespace = Union[ModuleType, type]
@@ -35,7 +35,6 @@ _HookExec = Callable[
     Union[object, list[object]],
 ]
 _HookImplFunction = Callable[..., Union[_T, Generator[None, Result[_T], None]]]
-
 
 class HookspecOpts(TypedDict):
     """Options for a hook specification."""
