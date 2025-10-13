@@ -26,6 +26,7 @@ import warnings
 from ._result import Result
 
 # Explain these class variables
+# Explain
 _T = TypeVar("_T")
 _F = TypeVar("_F", bound=Callable[..., object])
 _Namespace = Union[ModuleType, type]
