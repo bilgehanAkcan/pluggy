@@ -359,6 +359,7 @@ def varnames(func: object) -> tuple[tuple[str, ...], tuple[str, ...]]:
 class HookRelay:
     """Hook holder object for performing 1:N hook calls where N is the number
     of registered plugins."""
+    # test for web hook connectivity
 
     __slots__ = ("__dict__",)
 
